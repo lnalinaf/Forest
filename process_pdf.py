@@ -10,7 +10,7 @@ forest_data_dir = SETTINGS.forest_data_dir
 volunteer_name = SETTINGS.volunteer_name
 initial_forest_data_xlsx = os.path.join(forest_data_dir, "Initial_forest_data.xlsx")
 # target_folder_path = "/Users/alina/Downloads/004-ТМ-41-24_47_Ленинское"
-events_full_names = {'размножения насекомоядных птиц и других насекомоядных':
+events_names = {'размножения насекомоядных птиц и других насекомоядных':
                          'Улучшение условий обитания и размножения насекомоядных год птиц и других насекомоядных животных',
                      'СОМ не требуется':'СОМ не требуется'}
 
@@ -113,7 +113,7 @@ def extract_info(document_text):
                 print(f"Zone Name: {zone_name}")
             event = event_match.group(2)  # Extracts 'СОМ не требуется'
             print(f"Event: {event}")
-            full_event_name = events_full_names.get(event, "STILL NO NAME")
+            full_event_name = events_names.get(event, "STILL NO NAME")
     print('full_event_name', full_event_name)
     return forest_name, zone_name, area, zone_1, zone_2, full_event_name
 
