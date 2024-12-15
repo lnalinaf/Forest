@@ -1,12 +1,13 @@
 from openpyxl import load_workbook
-import pandas as pd
+from setting import SETTINGS
 import os
 import requests
 import zipfile
 
-forest_dir = '/Users/alina/Downloads/forest_data/'
+forest_dir = SETTINGS.forest_data_dir
 # Load the CSV data
-forest_data = os.path.join(forest_dir, 'initial_forest_data.xlsx')
+forest_data = os.path.join(forest_dir, 'Initial_forest_data.xlsx')
+
 
 def get_hyperlinks():
     workbook = load_workbook(forest_data, data_only=True)
@@ -19,6 +20,7 @@ def get_hyperlinks():
                 print('yield, ', cell.value, cell.hyperlink.target)
                 yield cell.value, cell.hyperlink.target
 
+
 def download_unzip(file_name, file_url):
     response = requests.get(file_url)
     file_name = file_name.replace('/', '.')
@@ -30,7 +32,6 @@ def download_unzip(file_name, file_url):
     with open(zip_filepath, 'wb') as f:
         f.write(response.content)
 
-        # Unzip the file
     target_unzip_folder = os.path.join(forest_dir, file_name)
     with zipfile.ZipFile(zip_filepath, 'r') as zip_ref:
         zip_ref.extractall(target_unzip_folder)
