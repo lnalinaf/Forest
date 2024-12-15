@@ -1,0 +1,25 @@
+# Ignore IDE files and settings
+.idea/               # PyCharm, IntelliJ settings
+.vscode/             # Visual Studio Code settings
+*.iml                # IntelliJ project files
+*.sublime-project    # Sublime project files
+*.sublime-workspace  # Sublime workspace files
+
+# Ignore Python-specific files
+__pycache__/         # Python bytecode cache
+*.pyc                # Compiled Python files
+*.pyo                # Compiled Python files
+*.pyd                # Compiled Python files
+*.db                 # Database files
+*.sqlite3            # SQLite database files
+
+# Ignore environment files
+.env                 # Environment variables
+.venv/               # Virtual environment
+env/                 # Another virtual environment folder
+
+# Ignore log and system files
+*.log                # Log files
+.DS_Store            # macOS system file
+Thumbs.db            # Windows thumbnail cache
+
