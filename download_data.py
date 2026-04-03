@@ -21,24 +21,29 @@ def get_hyperlinks():
                 yield cell.value, cell.hyperlink.target
 
 
-def download_unzip(file_name, file_url):
+def download_unzip(file_name, file_url, base_dir=forest_dir):
     response = requests.get(file_url)
     file_name = file_name.replace('/', '.')
-    zip_filepath = os.path.join(forest_dir, f'{file_name}.zip')
+    zip_filepath = os.path.join(base_dir, f'{file_name}.zip')
+    target_unzip_folder = os.path.join(base_dir, file_name)
     print('zip_filepath', zip_filepath)
+    
     if os.path.isfile(zip_filepath):
         print('zip exists')
-        return
+        return target_unzip_folder
+
     with open(zip_filepath, 'wb') as f:
         f.write(response.content)
 
-    target_unzip_folder = os.path.join(forest_dir, file_name)
     with zipfile.ZipFile(zip_filepath, 'r') as zip_ref:
         zip_ref.extractall(target_unzip_folder)
+        
+    return target_unzip_folder
 
 
 def main():
     for name, hyperlink in get_hyperlinks():
         download_unzip(name, hyperlink)
 
-main()
+if __name__ == "__main__":
+    main()
